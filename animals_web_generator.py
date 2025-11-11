@@ -10,24 +10,26 @@ animals_data = load_data("animals_data.json")
 def print_data(data):
     output = ""
     for animal in data:
+        # append information to each string
         name = animal.get("name")
         diet = animal.get("characteristics").get("diet")
         location = animal.get("locations")[0]
         type_ = animal.get("characteristics").get("type")
 
+        output += '<li class="cards__item">'
         if name:
-            output += f"Name: {name}\n"
+            output += f"Name: {name}<br/>\n"
 
         if diet:
-            output += f"Diet: {diet}\n"
+            output += f"Diet: {diet}<br/>\n"
 
         if location:
-            output += f"Location: {location}\n"
+            output += f"Location: {location}<br/>\n"
 
         if type_:
-            output += f"Type: {type_}\n"
+            output += f"Type: {type_}<br/>\n"
 
-        output += "\n"
+        output += '</li>'
     return output
 
 
