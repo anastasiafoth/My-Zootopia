@@ -17,28 +17,28 @@ def serialize_animal(animal):
     slogan = animal.get("characteristics").get("slogan")
     color = animal.get("characteristics").get("color")
 
-    output += '<li class="cards__item">\n'
+    output += "<li class='cards__item'>\n"
 
     if name:
-        output += f'<div class="card__title">{name}</div>\n'
+        output += f"<div class='card__title'>{name}</div>\n"
 
-    output += '<p class="card__text">\n'
+    output += "<div class='card__text'>\n<ul class='list_format'>\n"
     if diet:
-        output += f"<strong>Diet:</strong> {diet}<br/>\n"
+        output += f"<li class='list_enumeration'><strong>Diet:</strong> {diet}</li>\n"
 
     if location:
-        output += f"<strong>Location:</strong> {location}<br/>\n"
+        output += f"<li class='list_enumeration'><strong>Location:</strong> {location}</li>\n"
 
     if type_:
-        output += f"<strong>Type:</strong> {type_}<br/>\n"
+        output += f"<li class='list_enumeration'><strong>Type:</strong> {type_}</li>\n"
 
     if slogan:
-        output += f"<strong>Slogan:</strong> {slogan}<br/>\n"
+        output += f"<li class='list_enumeration'><strong>Slogan:</strong> {slogan}</li>\n"
 
     if color:
-        output += f"<strong>Color:</strong> {color}<br/>\n"
+        output += f"<li class='list_enumeration'><strong>Color:</strong> {color}</li>\n"
 
-    output += '</p>\n </li>\n'
+    output += '</ul>\n</div>\n </li>\n'
     return output
 
 def print_data(data):
