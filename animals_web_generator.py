@@ -14,6 +14,8 @@ def serialize_animal(animal):
     diet = animal.get("characteristics").get("diet")
     location = animal.get("locations")[0]
     type_ = animal.get("characteristics").get("type")
+    slogan = animal.get("characteristics").get("slogan")
+    color = animal.get("characteristics").get("color")
 
     output += '<li class="cards__item">\n'
 
@@ -29,6 +31,12 @@ def serialize_animal(animal):
 
     if type_:
         output += f"<strong>Type:</strong> {type_}<br/>\n"
+
+    if slogan:
+        output += f"<strong>Slogan:</strong> {slogan}<br/>\n"
+
+    if color:
+        output += f"<strong>Color:</strong> {color}<br/>\n"
 
     output += '</p>\n </li>\n'
     return output
