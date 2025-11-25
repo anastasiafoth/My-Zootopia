@@ -55,8 +55,11 @@ def return_data_based_on_user_input(user_input):
     output = ""
     animals_data = load_data_from_api(user_input)
 
-    for animal in animals_data:
-        output += serialize_animal(animal)
+    if animals_data:
+        for animal in animals_data:
+            output += serialize_animal(animal)
+    else:
+        output += f"<p style='color: #b00;'><strong>Notice:</strong> The animal '{user_input}' doesn't exist.</p>"
 
     return output
 
