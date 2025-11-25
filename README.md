@@ -21,7 +21,6 @@ My-Zootopia/
 ├── data_fetcher.py             # API integration module
 ├── animals.html               # Generated HTML output
 ├── animals_template.html      # HTML template for rendering
-├── animals_data.json          # Local animal data cache
 ├── requirements.txt           # Python dependencies
 ├── .env                       # Environment variables (API key)
 ├── .gitignore                 # Git ignore file
