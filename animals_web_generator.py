@@ -1,17 +1,16 @@
 import requests
 
 API_KEY = "igVwTHLCXTvcKZ9bA+Ujtg==0tNq4XKjwH8DoWSY"
-URL = "https://api.api-ninjas.com/v1/animals?name=Fox"
+URL = "https://api.api-ninjas.com/v1/animals?name="
 
-def load_data_from_api():
+def load_data_from_api(user_input):
     headers = {
         "X-Api-Key": API_KEY
     }
 
-    res = requests.get(URL, headers=headers)
+    url = URL + user_input
+    res = requests.get(url, headers=headers)
     return res.json()
-
-animals_data = load_data_from_api()
 
 
 def serialize_animal(animal):
@@ -52,23 +51,13 @@ def serialize_animal(animal):
     return output
 
 
-def skin_types_in_list(data):
-    skin_types_list = []
-    for animal in data:
-        skin_type = animal.get("characteristics", {}).get("skin_type")
-        if skin_type and skin_type not in skin_types_list:
-            skin_types_list.append(skin_type)
-    return skin_types_list
-
-
-def return_data_based_on_skin_type(skin_type_input):
+def return_data_based_on_user_input(user_input):
     output = ""
+    animals_data = load_data_from_api(user_input)
 
     for animal in animals_data:
-        if skin_type_input == animal.get("characteristics", {}).get("skin_type").lower():
-            output += serialize_animal(animal)
-        else:
-            continue
+        output += serialize_animal(animal)
+
     return output
 
 
@@ -77,8 +66,8 @@ def load_html(file_path):
         return file.read()
 
 
-def write_html(skin_type_input, html):
-    output = return_data_based_on_skin_type(skin_type_input)
+def write_html(user_input, html):
+    output = return_data_based_on_user_input(user_input)
 
     html = html.replace("__REPLACE_ANIMALS_INFO__", output)
 
@@ -87,26 +76,20 @@ def write_html(skin_type_input, html):
 
 
 def main():
-    skin_types_list = skin_types_in_list(animals_data)
-    skin_types_as_string = ", ".join(skin_types_list)
 
     while True:
-        skin_type_input = input(f"Here are the skin types of foxes: \n{skin_types_as_string}\nPlease enter one: ").lower().strip()
-        if skin_type_input.isdigit():
-            print("Please enter a string!")
-        elif not skin_type_input:
-            print("Input shouldn´t be empty!")
-        elif skin_type_input:
-            for skin_type in skin_types_list:
-                if skin_type.lower() == skin_type_input:
-                    break
-            else:
-                print("Skin type not found!")
+        user_input = input("Enter a name of an animal: ").lower().strip()
 
+        if user_input.isdigit():
+            print("Please enter a string!")
+        elif not user_input:
+            print("Input shouldn´t be empty!")
+        else:
             break
 
     html = load_html("animals_template.html")
-    write_html(skin_type_input, html)
+    write_html(user_input, html)
+    print("Website was successfully generated to the file animals.html.")
 
 
 if __name__ == "__main__":
