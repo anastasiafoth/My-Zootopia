@@ -1,16 +1,4 @@
-import requests
-
-API_KEY = "igVwTHLCXTvcKZ9bA+Ujtg==0tNq4XKjwH8DoWSY"
-URL = "https://api.api-ninjas.com/v1/animals?name="
-
-def load_data_from_api(user_input):
-    headers = {
-        "X-Api-Key": API_KEY
-    }
-
-    url = URL + user_input
-    res = requests.get(url, headers=headers)
-    return res.json()
+import data_fetcher
 
 
 def serialize_animal(animal):
@@ -53,7 +41,7 @@ def serialize_animal(animal):
 
 def return_data_based_on_user_input(user_input):
     output = ""
-    animals_data = load_data_from_api(user_input)
+    animals_data = data_fetcher.load_data_from_api(user_input)
 
     if animals_data:
         for animal in animals_data:
