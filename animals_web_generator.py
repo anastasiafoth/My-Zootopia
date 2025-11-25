@@ -1,11 +1,17 @@
-import json
+import requests
 
-def load_data(file_path):
-  """ Loads a JSON file """
-  with open(file_path, "r") as handle:
-    return json.load(handle)
+API_KEY = "igVwTHLCXTvcKZ9bA+Ujtg==0tNq4XKjwH8DoWSY"
+URL = "https://api.api-ninjas.com/v1/animals?name=Fox"
 
-animals_data = load_data("animals_data.json")
+def load_data_from_api():
+    headers = {
+        "X-Api-Key": API_KEY
+    }
+
+    res = requests.get(URL, headers=headers)
+    return res.json()
+
+animals_data = load_data_from_api()
 
 
 def serialize_animal(animal):
